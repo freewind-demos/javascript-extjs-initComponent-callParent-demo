@@ -1,16 +1,26 @@
+Ext.define('My.Custom.Window', {
+    extend: 'Ext.window.Window',
+    width: 400,
+    height: 300,
+    layout: 'fit',
+    modal: true,
+    items: [{
+        xtype: 'panel',
+        html: '<div style="padding: 20px;">This is a custom ExtJS window!</div>',
+        bodyStyle: {
+            background: '#f0f0f0'
+        }
+    }],
+    buttons: [{
+        text: 'Close',
+        handler: function (btn) {
+            const win = btn.up('window');
+            win.close();
+        }
+    }]
+})
+
 Ext.onReady(() => {
-    new Ext.panel.Panel({
-        renderTo: 'main',
-        height: 100,
-        width: 200,
-        title: 'Hello',
-        items: [
-            new Ext.button.Button({
-                text: 'extjs',
-            }),
-            new Ext.button.Button({
-                text: 'typescript',
-            })
-        ]
-    })
+    const win = Ext.create('My.Custom.Window');
+    win.show();
 });
